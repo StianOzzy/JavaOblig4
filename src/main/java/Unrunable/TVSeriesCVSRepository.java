@@ -22,11 +22,11 @@ public class TVSeriesCVSRepository implements TVSeriesRepository {
         fornuftig å velge et tegn som typisk ikke benyttes i vanlig skriftlig språk.
          */
 
-        try (FileWriter fileWriter = new FileWriter("tvseries.csv")) {
+        try (FileWriter fileWriter = new FileWriter(file.getName())) {
             for (TVSeries series : listOfTVSeries) {
                 fileWriter.write(series.toCSV() + "\n");
             }
-            System.out.println("TV-series written to tvseries.csv");
+            System.out.println("TV-series written to" + file.getName());
         } catch (IOException e) {
             System.err.println("Error writing to file " + e.getMessage());
         }
@@ -43,7 +43,7 @@ public class TVSeriesCVSRepository implements TVSeriesRepository {
         tom liste.
          */
         ArrayList<TVSeries> tvSeriesList = new ArrayList<>();
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader("tvseries.csv"))) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file.getName()))) {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 TVSeries series = TVSeries.fromCSV(line);
@@ -66,7 +66,7 @@ public class TVSeriesCVSRepository implements TVSeriesRepository {
         tilsvarende tittel som i parameteren. Hvis TV-serien som det søkes
         etter ikke blir funnet, returner null (nøkkelordet, ikke tallet).
          */
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader("tvseries.csv"))) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file.getName()))) {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 TVSeries tvSeries = TVSeries.fromCSV(line);
