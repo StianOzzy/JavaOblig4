@@ -11,6 +11,7 @@ public interface TVSeriesRepository {
      */
 
     public void addListOfTVSeries(ArrayList<TVSeries> listOfTVSeries);
+    
 
     public ArrayList<TVSeries> getAllTVSeries();
 
