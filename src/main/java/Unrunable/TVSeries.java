@@ -22,6 +22,17 @@ public class TVSeries {
         this.releaseDate = releaseDate;
     }
 
+    public static TVSeries fromCSV(String csvLine) {
+        String[] values = csvLine.split(";");
+        if (values.length != 5) return null;
+        String title = values[0];
+        String description = values[1];
+        int year = Integer.parseInt(values[2]);
+        int month = Integer.parseInt(values[3]);
+        int day = Integer.parseInt(values[4]);
+        return new TVSeries(title, description, LocalDate.of(year, month, day));
+    }
+
 
 
     // METHODS
@@ -75,6 +86,9 @@ public class TVSeries {
             totalRuntime += episodes.get(i).getRuntime();
         }
         this.averageRunTime = totalRuntime / episodes.size();
+    }
+    public String toCSV() {
+        return title + ";" + description + ";" + releaseDate.getYear() + ";" + releaseDate.getMonthValue() + ";" + releaseDate.getDayOfMonth();
     }
 
 
